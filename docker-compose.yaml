@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  httpd:
+    build:
+      context: httpd
+      args:
+        - HTTPD_VERSION=${HTTPD_VERSION}
+        - HTTPD_OS_VERSION=${HTTPD_OS_VERSION}
+    ports:
+      - "80:80"
+  php:
+    build:
+      context: php
+      args:
+        - PHP_VERSION=${PHP_VERSION}
+        - PHP_OS_VERSION=${PHP_OS_VERSION}
+    volumes:
+      - type: bind
+        source: ./htdocs
+        target: /usr/local/apache2/htdocs
